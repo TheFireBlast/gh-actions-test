@@ -1,7 +1,7 @@
 const assert = require("assert");
 
 function doThing() {
-    return true;
+    return !true;
 }
 
 assert(doThing() == true);
