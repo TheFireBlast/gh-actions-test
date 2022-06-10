@@ -1,0 +1,25 @@
+name: Test
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [16, 17]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+      - uses: pnpm/action-setup@v2.2.2
+        with:
+          version: 7
+      - name: Install Dependencies
+        run: pnpm install
+      - name: Run All Tests
+        run: pnpm test
